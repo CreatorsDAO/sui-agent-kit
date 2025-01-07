@@ -1,2 +1,2 @@
 # sui-agent-kit
-connect any ai agents to SUI 
+Connect any ai agents to SUI Network.
