@@ -1,12 +1,12 @@
-# sui-agent-kit
-Connect any ai agents to SUI Network.
+import { SuiAgent } from "../../src";
 
-```typescript
-const agent = new SuiAgent({
+describe("hello", () => {
+  it("should return hello", async () => {
+    const agent = new SuiAgent({
       model: "deepseek-chat",
-      openAiApiKey: "sk-",
+      openAiApiKey: "sk-2ce9470b6c4249a997ed66bd63b1639a",
       walletPrivateKey:
-        "suiprivkey",
+        "suiprivkey1qzuw2uvhqz330pwl94rv39jvk93kuvfd4pvdkw9vl922kum80prqvxtlntr",
       network: "testnet",
       baseUrl: "https://api.deepseek.com",
     });
@@ -22,4 +22,5 @@ const agent = new SuiAgent({
     // // or, execute commands in natural language
     const chatResp = await agent.execute("Send 0.1 SUI to 0x1");
     console.log(chatResp);
-```
+  });
+});
