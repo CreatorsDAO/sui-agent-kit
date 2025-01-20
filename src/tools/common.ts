@@ -21,3 +21,10 @@ export const getExecutor = async (
   console.log("address", address);
   return executor;
 };
+
+export const getTransactionLink = (
+  network: "devnet" | "testnet" | "mainnet",
+  digest: string
+) => {
+  return `https://${network}.suivision.xyz/txblock/${digest}`;
+};
