@@ -16,7 +16,6 @@ export const transfer = async (
   try {
     console.log("transfer params : ", params);
     const executor = await getExecutor(privateKey, network);
-
     const meta = getTokenMetadata(params.symbol);
     if (!meta) {
       throw new Error("Token not found");

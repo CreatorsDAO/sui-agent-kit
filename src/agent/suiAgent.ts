@@ -74,7 +74,6 @@ export class SuiAgent {
     const response = await this.agentExecutor.invoke({
       input,
     });
-    console.log("response", response);
     return response;
   }
 
