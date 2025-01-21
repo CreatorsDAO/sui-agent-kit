@@ -4,7 +4,7 @@ describe("hello", () => {
   it("should return hello", async () => {
     const agent = new SuiAgent({
       model: "deepseek-chat",
-      openAiApiKey: "sk-2ce9470b6c4249a997ed66bd63b1639a",
+      openAiApiKey: "sk-64e2e1d629e6441f84cfe9672822579b",
       walletPrivateKey:
         "suiprivkey1qzuw2uvhqz330pwl94rv39jvk93kuvfd4pvdkw9vl922kum80prqvxtlntr",
       network: "testnet",

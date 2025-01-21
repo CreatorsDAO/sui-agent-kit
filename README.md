@@ -1,5 +1,12 @@
 # sui-agent-kit
-Connect any ai agents to SUI Network.
+
+## Install
+
+```bash
+npm install sui-agent-kit
+```
+
+## New Agent Instance
 
 ```typescript
 const agent = new SuiAgent({
@@ -10,6 +17,11 @@ const agent = new SuiAgent({
   network: "testnet",
   baseUrl: "https://api.deepseek.com",
 });
+```
+
+## Transfer token
+
+```typescript
 
 // // Call different functions
 const resp = await agent.transfer({
@@ -17,6 +29,7 @@ const resp = await agent.transfer({
   amount: "0.1",
   symbol: "SUI",
 });
+
 console.log(resp);
 
 // // or, execute commands in natural language
