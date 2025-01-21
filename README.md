@@ -1,5 +1,8 @@
 # sui-agent-kit
 
+Connect any AI agents to SUI Network.
+
+
 ## Install
 
 ```bash
