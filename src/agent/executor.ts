@@ -1,7 +1,7 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { createToolCallingAgent, AgentExecutor } from "langchain/agents";
-import { createTools } from "../tools";
+import { createTools, SuiAgentInterface } from "../tools";
 import { modelMapping } from "./models";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
@@ -27,10 +27,7 @@ export const prompt = ChatPromptTemplate.fromMessages([
 ]);
 
 export const createAgentExecutor = (
-  suiAgent: {
-    getCredentials: () => { walletPrivateKey: string };
-    getNetwork: () => "devnet" | "testnet" | "mainnet";
-  },
+  suiAgent: SuiAgentInterface,
   modelName: keyof typeof modelMapping,
   openAiApiKey?: string,
   anthropicApiKey?: string,

@@ -39,3 +39,16 @@ console.log(resp);
 const chatResp = await agent.execute("Send 0.1 SUI to 0x1");
 console.log(chatResp);
 ```
+
+## Get Balance
+
+```typescript
+const resp = await agent.getBalance({
+  walletAddress: agent.getAddress(),
+  assetSymbol: "SUI",
+});
+console.log(resp);
+
+const chatResp = await agent.execute("What is my SUI Balance?");
+console.log(chatResp);
+```

@@ -3,10 +3,15 @@
   "version": "1.0.2",
   "description": "Connect any ai agents to SUI Network.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsc --outDir dist",    
     "test-all": "mocha --require ts-node/register test/*/*.test.ts",
-    "test-example": "mocha --timeout 10000 --require ts-node/register test/example/*.test.ts"
+    "test-file": "mocha --timeout 10000 --require ts-node/register"
   },
   "keywords": [],
   "author": "",

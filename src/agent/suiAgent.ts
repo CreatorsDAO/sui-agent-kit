@@ -11,10 +11,16 @@
 // } from "./transfers/transfers.js";
 import { createAgentExecutor } from "./executor";
 import type { AgentExecutor } from "langchain/agents";
-// import { getOwnBalance, type GetOwnBalanceParams } from "./read/balance.js";
 
 import { modelMapping } from "./models";
-import { TransferParams, transfer as walletTransfer } from "../tools/basic";
+import {
+  TransferParams,
+  transfer as walletTransfer,
+  GetBalanceParams,
+  getBalance,
+} from "../tools/basic";
+import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
+import { Network } from "../tools/common";
 
 export interface SuiAgentConfig {
   walletPrivateKey: string;
@@ -22,7 +28,7 @@ export interface SuiAgentConfig {
   openAiApiKey?: string;
   anthropicApiKey?: string;
   googleGeminiApiKey?: string;
-  network: "devnet" | "testnet" | "mainnet";
+  network: Network;
   baseUrl?: string;
 }
 
@@ -33,7 +39,7 @@ export class SuiAgent {
   private openAiApiKey?: string;
   private anthropicApiKey?: string;
   private googleGeminiApiKey?: string;
-  private network: "devnet" | "testnet" | "mainnet";
+  private network: Network;
   private baseUrl?: string;
   constructor(config: SuiAgentConfig) {
     this.walletPrivateKey = config.walletPrivateKey;
@@ -70,7 +76,13 @@ export class SuiAgent {
     return this.network;
   }
 
+  getAddress() {
+    const pair = Ed25519Keypair.fromSecretKey(this.walletPrivateKey);
+    return pair.getPublicKey().toSuiAddress();
+  }
+
   async execute(input: string) {
+    console.log("execute input : ", input);
     const response = await this.agentExecutor.invoke({
       input,
     });
@@ -97,7 +109,7 @@ export class SuiAgent {
   //   return await addLiquidity(params, this.walletPrivateKey);
   // }
 
-  // async getOwnBalance(params: GetOwnBalanceParams) {
-  //   return await getOwnBalance(params, this.walletPrivateKey);
-  // }
+  async getBalance(params: GetBalanceParams) {
+    return await getBalance(params, this);
+  }
 }
