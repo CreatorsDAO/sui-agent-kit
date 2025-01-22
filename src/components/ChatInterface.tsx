@@ -38,6 +38,13 @@ const ChatInterface: React.FC = () => {
     setInput("");
     setIsLoading(true);
 
+    const loadingMessage: ChatMessageType = {
+      role: "assistant",
+      content: "Thinking...",
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, loadingMessage]);
+
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -58,27 +65,29 @@ const ChatInterface: React.FC = () => {
       }
 
       if (data.success && data.data) {
-        const assistantMessage: ChatMessageType = {
-          role: "assistant",
-          content: data.data.output,
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
+        setMessages((prev) =>
+          prev.slice(0, -1).concat({
+            role: "assistant",
+            content: data.data.output,
+            timestamp: new Date(),
+          })
+        );
       } else {
         throw new Error(data.error || "Unknown error");
       }
     } catch (error) {
       console.error("Chat error:", error);
-      const errorMessage: ChatMessageType = {
-        role: "assistant",
-        content: `Error: ${
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred. Please try again."
-        }`,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) =>
+        prev.slice(0, -1).concat({
+          role: "assistant",
+          content: `Error: ${
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred. Please try again."
+          }`,
+          timestamp: new Date(),
+        })
+      );
     } finally {
       setIsLoading(false);
     }
