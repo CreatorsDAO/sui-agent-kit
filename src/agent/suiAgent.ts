@@ -41,7 +41,10 @@ export class SuiAgent {
   private googleGeminiApiKey?: string;
   private network: Network;
   private baseUrl?: string;
+  private messages: string[] = [];
+
   constructor(config: SuiAgentConfig) {
+    this.messages = [];
     this.walletPrivateKey = config.walletPrivateKey;
     this.model = config.model;
     this.openAiApiKey = config.openAiApiKey;
@@ -82,20 +85,31 @@ export class SuiAgent {
   }
 
   async execute(input: string) {
+    const maxMessages = 100;
+
     console.log("execute input : ", input);
+
     const response = await this.agentExecutor.invoke({
       input,
+      chat_history: this.messages.join("\n"),
     });
+    this.messages.push(`User: ${input}`);
+    this.messages.push(`Assistant: ${response.output}`);
+
+    if (this.messages.length > maxMessages) {
+      this.messages = this.messages.slice(-maxMessages);
+    }
+
     return response;
+  }
+
+  async transfer(params: TransferParams) {
+    return await walletTransfer(params, this.walletPrivateKey, this.network);
   }
 
   // async swapExactInput(params: SwapExactInputParams) {
   //   return await swapExactInput(params, this.walletPrivateKey);
   // }
-
-  async transfer(params: TransferParams) {
-    return await walletTransfer(params, this.walletPrivateKey, this.network);
-  }
 
   // async supplyCollateral(params: SupplyCollateralParams) {
   //   return await supplyCollateral(params, this.walletPrivateKey);
