@@ -1,0 +1,45 @@
+.messageContainer {
+  display: flex;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  gap: 1rem;
+  max-width: 80%;
+}
+
+.user {
+  margin-left: auto;
+  flex-direction: row-reverse;
+  background-color: #f0f0f0;
+  border-radius: 1rem 1rem 0 1rem;
+}
+
+.assistant {
+  margin-right: auto;
+  background-color: #ffffff;
+  border-radius: 1rem 1rem 1rem 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message {
+  line-height: 1.5;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #666;
+} 

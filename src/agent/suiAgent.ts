@@ -50,7 +50,7 @@ export class SuiAgent {
     this.network = config.network;
     this.baseUrl = config.baseUrl;
     if (!this.walletPrivateKey) {
-      throw new Error("Fuel wallet private key is required.");
+      throw new Error("Sui wallet private key is required.");
     }
 
     this.agentExecutor = createAgentExecutor(

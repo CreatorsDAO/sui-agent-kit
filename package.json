@@ -9,9 +9,13 @@
     "src"
   ],
   "scripts": {
-    "build": "tsc --outDir dist",    
+    "build": "tsc --outDir dist",
+    "build:server": "tsc -p tsconfig.server.json",
     "test-all": "mocha --require ts-node/register test/*/*.test.ts",
-    "test-file": "mocha --timeout 10000 --require ts-node/register"
+    "test-file": "mocha --timeout 10000 --require ts-node/register",
+    "dev": "vite dev",
+    "server": "nodemon --exec tsx src/server/index.ts",
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\""
   },
   "keywords": [],
   "author": "",
@@ -22,15 +26,32 @@
     "@langchain/google-genai": "^0.1.6",
     "@langchain/openai": "^0.3.14",
     "@mysten/sui": "^1.20.0",
+    "@types/express": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "langchain": "^0.3.12",
+    "next": "^15.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsx": "^4.19.2",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.10.6",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.18.0",
+    "eslint-plugin-react": "^7.37.4",
     "mocha": "^11.0.1",
+    "nodemon": "^2.0.22",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11"
   }
 }
